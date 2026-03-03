@@ -1,5 +1,15 @@
 # @biomejs/biome
 
+## 2.4.6
+
+### Patch Changes
+
+- [#9305](https://github.com/biomejs/biome/pull/9305) [`40869b5`](https://github.com/biomejs/biome/commit/40869b5a698de5e0d2c06bc7587a9cad8c0389c5) Thanks [@ematipico](https://github.com/ematipico)! - Fixed [#4946](https://github.com/biomejs/biome/issues/4946): `noUnreachable` no longer reports code inside `finally` blocks as unreachable when there is a `break`, `continue`, or `return` in the corresponding `try` body.
+
+- [#9303](https://github.com/biomejs/biome/pull/9303) [`464910c`](https://github.com/biomejs/biome/commit/464910c06058454a0a0ed08998e1b32cb4a6ca67) Thanks [@ematipico](https://github.com/ematipico)! - Fixed [#2786](https://github.com/biomejs/biome/issues/2786): The formatter no longer produces different output on subsequent runs when a `case` clause has a trailing line comment followed by a single block statement.
+
+- [#9298](https://github.com/biomejs/biome/pull/9298) [`1003229`](https://github.com/biomejs/biome/commit/1003229853c80569751137b6f52dcc1b08aed659) Thanks [@Netail](https://github.com/Netail)! - Fixed [`#9296`](https://github.com/biomejs/biome/issues/9296), so comments are moved along with the attributes in the useSortedAttributes assist rule code fix.
+
 ## 2.4.5
 
 ### Patch Changes
