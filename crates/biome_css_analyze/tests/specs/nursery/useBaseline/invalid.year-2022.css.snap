@@ -1,0 +1,34 @@
+---
+source: crates/biome_css_analyze/tests/spec_tests.rs
+expression: invalid.year-2022.css
+---
+# Input
+```css
+/* should generate diagnostics */
+
+/* hyphens became newly available in 2023, fails cutoff of 2022 */
+p { hyphens: auto; }
+
+/* :has became newly available in 2023, fails cutoff of 2022 */
+h1:has(+ h2) { margin: 0; }
+
+```
+
+# Diagnostics
+```
+invalid.year-2022.css:4:5 lint/nursery/useBaseline ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  i CSS property hyphens is not a Baseline feature.
+  
+    3 │ /* hyphens became newly available in 2023, fails cutoff of 2022 */
+  > 4 │ p { hyphens: auto; }
+      │     ^^^^^^^
+    5 │ 
+    6 │ /* :has became newly available in 2023, fails cutoff of 2022 */
+  
+  i See MDN Baseline for more information.
+  
+  i This rule belongs to the nursery group, which means it is not yet stable and may change in the future. Visit https://biomejs.dev/linter/#nursery for more information.
+  
+
+```

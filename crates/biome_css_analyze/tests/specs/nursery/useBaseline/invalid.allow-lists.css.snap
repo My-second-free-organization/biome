@@ -1,0 +1,99 @@
+---
+source: crates/biome_css_analyze/tests/spec_tests.rs
+expression: invalid.allow-lists.css
+---
+# Input
+```css
+/* should generate diagnostics */
+
+/* allowProperties: only accent-color is allowed, backdrop-filter is still flagged */
+a { accent-color: red; backdrop-filter: blur(10px); }
+
+/* allowSelectors: only "has" is allowed, fullscreen is still flagged */
+h1:has(+ h2) { margin: 0; }
+h1:fullscreen { color: red; }
+
+/* allowFunctions: only color-mix is allowed, abs is still flagged */
+a { width: abs(20% - 100px); }
+
+/* allowMediaConditions: only scripting is allowed, inverted-colors is still flagged */
+@media (inverted-colors: inverted) { a { color: red; } }
+
+/* allowPropertyValues: only clip-path:fill-box is allowed, stroke-box is still flagged */
+@supports (clip-path: fill-box) { a { clip-path: stroke-box; } }
+
+```
+
+# Diagnostics
+```
+invalid.allow-lists.css:4:24 lint/nursery/useBaseline ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  i CSS property backdrop-filter is not a Baseline feature.
+  
+    3 │ /* allowProperties: only accent-color is allowed, backdrop-filter is still flagged */
+  > 4 │ a { accent-color: red; backdrop-filter: blur(10px); }
+      │                        ^^^^^^^^^^^^^^^
+    5 │ 
+    6 │ /* allowSelectors: only "has" is allowed, fullscreen is still flagged */
+  
+  i See MDN Baseline for more information.
+  
+  i This rule belongs to the nursery group, which means it is not yet stable and may change in the future. Visit https://biomejs.dev/linter/#nursery for more information.
+  
+
+```
+
+```
+invalid.allow-lists.css:8:4 lint/nursery/useBaseline ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  i CSS pseudo-class fullscreen is not a Baseline feature.
+  
+     6 │ /* allowSelectors: only "has" is allowed, fullscreen is still flagged */
+     7 │ h1:has(+ h2) { margin: 0; }
+   > 8 │ h1:fullscreen { color: red; }
+       │    ^^^^^^^^^^
+     9 │ 
+    10 │ /* allowFunctions: only color-mix is allowed, abs is still flagged */
+  
+  i See MDN Baseline for more information.
+  
+  i This rule belongs to the nursery group, which means it is not yet stable and may change in the future. Visit https://biomejs.dev/linter/#nursery for more information.
+  
+
+```
+
+```
+invalid.allow-lists.css:11:12 lint/nursery/useBaseline ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  i CSS function abs is not a Baseline feature.
+  
+    10 │ /* allowFunctions: only color-mix is allowed, abs is still flagged */
+  > 11 │ a { width: abs(20% - 100px); }
+       │            ^^^
+    12 │ 
+    13 │ /* allowMediaConditions: only scripting is allowed, inverted-colors is still flagged */
+  
+  i See MDN Baseline for more information.
+  
+  i This rule belongs to the nursery group, which means it is not yet stable and may change in the future. Visit https://biomejs.dev/linter/#nursery for more information.
+  
+
+```
+
+```
+invalid.allow-lists.css:14:9 lint/nursery/useBaseline ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  i CSS media condition inverted-colors is not a Baseline feature.
+  
+    13 │ /* allowMediaConditions: only scripting is allowed, inverted-colors is still flagged */
+  > 14 │ @media (inverted-colors: inverted) { a { color: red; } }
+       │         ^^^^^^^^^^^^^^^
+    15 │ 
+    16 │ /* allowPropertyValues: only clip-path:fill-box is allowed, stroke-box is still flagged */
+  
+  i See MDN Baseline for more information.
+  
+  i This rule belongs to the nursery group, which means it is not yet stable and may change in the future. Visit https://biomejs.dev/linter/#nursery for more information.
+  
+
+```
